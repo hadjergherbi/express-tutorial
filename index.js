@@ -8,6 +8,8 @@ const cors =require("cors")
 const authMiddleware=require("./middlewares/authMiddleware")
 const adminMiddleware=require("./middlewares/adminMiddleware")
 //create the server
+
+
 const app=express()
 let corsoptions={
     origin:["http://localhost:5173"]
