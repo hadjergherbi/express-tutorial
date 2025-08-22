@@ -5,7 +5,7 @@ try{
 let token=req.headers.authorization
 if(token){
     token=token.split(" ")[1]
-   const decodedToken= jwt.verify(token,"Secret_JWT")
+   const decodedToken= jwt.verify(token,process.env.JWT_SECRET)
    req.user=decodedToken
    next()
 }else{

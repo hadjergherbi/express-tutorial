@@ -2,7 +2,8 @@ const Todo=require("../models/Todo")
 const getAllTodos=async(req,res)=>{
     try{
     console.log("inside /todos")
-    const todos=await Todo.find()
+    const todos=await Todo.find().populate("user",{name:1,email:1,_id:0
+    })
     res.json({message:"todos list",data:todos})
     }catch(error){
         res.status(500).json({
@@ -14,10 +15,9 @@ const getAllTodos=async(req,res)=>{
 const createTodo=async(req,res)=>{
 try{
    
-     console.log("Post todos ",req.user.email)
     const newTodo=new Todo({
     name:req.body.name,
-    CreatedBy:req.user.email
+    user:req.user.id
 })
 await newTodo.save()
 const todos=await Todo.find()
@@ -35,7 +35,7 @@ const getTodoDetails=async(req,res)=>{
     {
         _id:req.params.id
     }
-   )
+   ).populate("user",{name:1})
   
 
     res.json({message:"Todo details",user:todo })

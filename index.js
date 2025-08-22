@@ -1,15 +1,11 @@
+require("dotenv").config()
 const express =require("express")
 const mongoose=require("mongoose")
-const bcrypt=require("bcryptjs")
-const Todo=require('./models/Todo')
-const User=require('./models/User')
-const jwt=require("jsonwebtoken")
 const cors =require("cors")
-const authMiddleware=require("./middlewares/authMiddleware")
-const adminMiddleware=require("./middlewares/adminMiddleware")
 const todosRoutes=require("./routes/todos.routes")
 const authRoutes=require("./routes/auth.routes")
 const userRoutes=require("./routes/user.routes")
+
 //create the server
 
 
@@ -25,7 +21,7 @@ app.use("",userRoutes)
 
 
 
-mongoose.connect("mongodb://localhost:27017/todos-App",
+mongoose.connect(process.env.DATABASE_URL,
     {serverSelectionTimeoutMS:5000}
 ).then(()=>{
 app.listen(5000,()=>{

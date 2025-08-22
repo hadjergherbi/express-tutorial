@@ -64,7 +64,7 @@ const Login=async(req,res)=>{
             email:user.email,
             id:user._id,
             Role:user.Role
-        },"Secret_JWT",{
+        },process.env.JWT_SECRET,{
             expiresIn:"1h"
         })
         res.status(200).json({
